@@ -1,2 +1,2 @@
 # brainfuck.js
-Library JS to write &amp; execute BrainFuck
+Library JS to execute BrainFuck in the web
