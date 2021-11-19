@@ -1,16 +1,18 @@
 (function() {
 
     /** BrainFuck object definition */
-    function BrainFuck(input, memorySize, ascii) {
+    function BrainFuck(code, options) {
         /**
          * Constructor
-         * @param {array|string} - Brainfuck code
-         * @param {number} - Memory size
+         * @param code {array|string} - Brainfuck code
+         * @param options {Object} - Options
          */
+        options = options || {};
 
-        this.input = input;
-        this.memorySize = memorySize || BrainFuck.MEMORY_SIZE;
-        this.ascii = ascii || false;
+        this.code = code;
+        this.memorySize = options.memorySize || BrainFuck.MEMORY_SIZE;
+        this.ascii = options.ascii || false;
+        this.inputs = (options.inputs || []).reverse();
 
         /** Init object with type */
         this.init();
@@ -37,19 +39,19 @@
         /** Reset Context */
         makeContext: function() {
 
-            /** Check for input type (array or string) */
-            this.raw = this.input;
-            if (Array.isArray(this.input)) {
+            /** Check for code type (array or string) */
+            this.raw = this.code;
+            if (Array.isArray(this.code)) {
                 this.type = BrainFuck.ARRAY;
-                this.data = this.input.filter(char => char !== " " || char !== "\n" || char !== "\t");
+                this.data = this.code.filter(char => char !== " " || char !== "\n" || char !== "\t");
             } else {
                 this.type = BrainFuck.STRING;
-                this.data = this.input.replaceAll(" ", "").replaceAll("\n", "").replaceAll("\t", "");
+                this.data = this.code.replaceAll(" ", "").replaceAll("\n", "").replaceAll("\t", "");
             }
 
             this.dataCursor = 0;
             this.loops = [];
-            this.out = "";
+            this.out = this.ascii ? "" : [];
 
             /** Init memory & cursor */
             this.cursor = 0;
@@ -93,15 +95,19 @@
             if (this.ascii) {
                 this.out += String.fromCharCode(this.memory[this.cursor]);
             } else {
-                this.out += this.memory[this.cursor] + " ";
+                this.out.push(this.memory[this.cursor]);
             }
         },
         get: function() {
-            let data = null;
-            while (data === null || isNaN(data)) {
-                data = +prompt();
+            if (this.inputs.length > 0) {
+                this.memory[this.cursor] = this.inputs.pop();
+            } else {
+                let data = null;
+                while (data === null || isNaN(data)) {
+                    data = +prompt();
+                }
+                this.memory[this.cursor] = data;
             }
-            this.memory[this.cursor] = data;
         },
         loop: function() {
             this.loops.push(this.dataCursor);
@@ -127,15 +133,19 @@
         },
 
         print: function() {
-            return this.out;
+            if (this.ascii) {
+                console.log(this.out);
+            } else {
+                console.log(this.out.join(","));
+            }
         },
 
         view: function() {
-            return this.memory;
+            console.log(this.memory, this.cursor);
         }
     };
 
-    window.brainfuck = (input, memorySize, ascii) => {
-        return new BrainFuck(input, memorySize, ascii);
+    window.brainfuck = (code, options) => {
+        return new BrainFuck(code, options);
     };
 })()
