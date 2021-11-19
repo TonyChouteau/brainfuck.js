@@ -95,7 +95,6 @@
             } else {
                 this.out += this.memory[this.cursor] + " ";
             }
-            console.log(this.out);
         },
         get: function() {
             let data = null;
@@ -125,6 +124,10 @@
                 this.dataCursor++;
             }
             return this;
+        },
+
+        print: function() {
+            return this.out;
         },
 
         view: function() {
