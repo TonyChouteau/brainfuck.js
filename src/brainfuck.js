@@ -110,7 +110,20 @@
             }
         },
         loop: function() {
-            this.loops.push(this.dataCursor);
+            if (this.memory[this.cursor] > 0) {
+                this.loops.push(this.dataCursor);
+            } else {
+                let loopCounter = 0;
+                this.dataCursor++;
+                while((this.data[this.dataCursor] !== "]" || loopCounter > 0) && this.dataCursor < this.data.length) {
+                    if (this.data[this.dataCursor] === "[") {
+                        loopCounter++;
+                    } else if (this.data[this.dataCursor] === "]") {
+                        loopCounter--;
+                    }
+                    this.dataCursor++;
+                }
+            }
         },
         goto: function() {
             if (this.loops.length === 0) {
@@ -124,11 +137,18 @@
         },
 
         /** Execution */
-        run: function() {
+        run: function(debug) {
             while (this.dataCursor < this.data.length) {
+                if (debug) this.view();
                 this.commands[this.data[this.dataCursor]]();
                 this.dataCursor++;
             }
+            if (debug) this.view();
+            return this;
+        },
+
+        view: function() {
+            console.log(this.memory, this.cursor);
             return this;
         },
 
@@ -139,10 +159,6 @@
                 console.log(this.out.join(","));
             }
         },
-
-        view: function() {
-            console.log(this.memory, this.cursor);
-        }
     };
 
     window.brainfuck = (code, options) => {
