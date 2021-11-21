@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>BrainFuck.js</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="images/icons/icon_white.png" />
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,38 +17,60 @@
 
     <!-- Vendor Js Lib -->
     <script src="lib/jquery-3.6.0.min.js"></script>
-    <script src="lib/brainfuck.min.js"></script>
+    <script src="../build/brainfuck.min.js"></script>
 
     <!-- Js scripts -->
     <script src="scripts/animation.js"></script>
     <script src="scripts/pages.js"></script>
+
+    <script src="scripts/download.js"></script>
+
+    <script src="scripts/editor.js"></script>
+
     <script src="scripts/index.js"></script>
 </head>
 <body>
     <div class="home page">
+        <div class="image logo"></div>
         <div class="content flex">
-            <div class="title home-title"><!-- Title generated with js --></div>
-            <div class="menu flex"></div>
+            <div class="title home-title"><!-- js generated--></div>
+            <div class="menu flex"><!-- js generated--></div>
         </div>
         <div class="footer flex">BrainFuck.js - Tony Chouteau - 2021</div>
     </div>
     <div class="doc page hidden">
-        <div class="header menu flex"></div>
+        <div class="image logo"></div>
+        <div class="header menu flex"><!-- js generated--></div>
         <div class="content flex">
-            Documentation
         </div>
     </div>
     <div class="download page hidden">
-        <div class="header menu flex"></div>
+        <div class="image logo"></div>
+        <div class="header menu flex"><!-- js generated--></div>
         <div class="content flex">
-            Download
+            <div class="buttons flex">
+                <div class="button flex download-button" data-download="source">Source Code</div>
+                <div class="button flex download-button" data-download="min">Minified Code</div>
+                <div class="button flex download-button" data-download="archive">Archive</div>
+            </div>
         </div>
     </div>
     <div class="editor page hidden">
-        <div class="header menu flex"></div>
+        <div class="image logo"></div>
+        <div class="header menu flex"><!-- js generated--></div>
         <div class="content flex">
-            Editor
+            <div class="controls flex">
+                <div class="control image run"></div>
+                <div class="control image pause"></div>
+                <div class="control image debug"></div>
+                <div class="control image next"></div>
+                <div class="control image prev hidden"></div>
+            </div>
+            <div class="viewer flex"><div><!-- js generated--></div></div>
+            <textarea class="input flex"></textarea>
+            <div class="output flex"></div>
         </div>
     </div>
+    <a class="link"></a>
 </body>
 </html>

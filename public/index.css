@@ -9,6 +9,38 @@ html, body, .page {
     height: 100%;
 
     background: white;
+    user-select:none;
+}
+
+.link {
+    display: none;
+}
+
+.image {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo {
+    top: 0;
+    left: 0;
+
+    position: absolute;
+
+    width: 60px;
+    height: 60px;
+
+    background-image: url("images/icons/icon_white_small.png");
+
+    cursor: pointer;
+}
+.home .logo {
+    background-image: url("images/icons/icon_black.png");
+
+    width: 100px;
+    height: 100px;
+
+    cursor: unset;
 }
 
 .page {
@@ -28,10 +60,14 @@ html, body, .page {
 }
 
 .header {
-    background: #f5f5f5;
+    background: black;
 }
 
-.content {
+.page .content {
+    width: 100%;
+    height: calc(100% - 60px);
+}
+.home .content {
     width: 100%;
     height: calc(100% - 50px);
 }
@@ -46,21 +82,37 @@ html, body, .page {
 }
 
 .title {
-    height: 150px;
-
     font-family: 'Arvo', serif;
-    font-weight: 700;
-    font-size: 120px;
     color: black;
+
+    text-align: center;
 }
 
-.content .menu {
+.page .title {
+    height: 30px;
+    padding: 30px;
+
+    font-weight: 400;
+    font-size: 25px;
+}
+.home .title {
+    height: 150px;
+
+    font-weight: 700;
+    font-size: 120px;
+}
+
+.home .menu {
     margin-top: 50px;
 }
 .menu {
     width: 100%;
-
     flex-direction: row;
+}
+
+.buttons {
+    margin: -20px;
+    height: 50%;
 }
 
 .button {
@@ -69,8 +121,8 @@ html, body, .page {
 
     transition: background 200ms ease-in-out;
 
-    background: #f5f5f5;
-    color: #000000;
+    background: black;
+    color: white;
 
     font-family: 'Arvo', serif;
     font-weight: 400;
@@ -78,12 +130,101 @@ html, body, .page {
 
     cursor: pointer;
 }
-
 .content .button {
+    margin: 10px;
+}
+.home .button {
     margin: 0 20px;
-    border-radius: 10px;
+}
+.button:hover {
+    background: #4f4f4f !important;
 }
 
-.button:hover {
-    background: #d9d9d9;
+/* Editor */
+
+.editor .content>div,
+.editor .content>textarea {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.controls {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.control {
+    width: 40px;
+    height: 40px;
+
+    margin: 0 5px;
+
+    background-color: black;
+    background-position: center;
+    background-size: 30px;
+
+    cursor: pointer;
+}
+.control:hover {
+    background-color: #4f4f4f;
+}
+
+.control.run {
+    background-image: url("images/controls/run.png");
+}
+.control.debug {
+    background-image: url("images/controls/debug.png");
+}
+.control.pause {
+    background-image: url("images/controls/pause.png");
+}
+.control.next {
+    background-image: url("images/controls/next.png");
+}
+
+.viewer,
+.output,
+.input {
+    height: 60px;
+    margin-top: 10px;
+
+    flex-direction: row;
+
+    background: #e8e8e8;
+
+    font-family: 'Arvo', serif;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.viewer,
+.output {
+    overflow: auto;
+    justify-content: flex-start;
+}
+.viewer>div {
+    padding: 0 10px;
+    white-space: nowrap;
+}
+.viewer span {
+    padding: 0 2px;
+}
+.viewer .cursor {
+    background: black;
+    color: white;
+}
+
+.input {
+    height: 300px;
+
+    margin-top: 30px;
+    border: none;
+
+    background: #e8e8e8;
+    word-break: break-all;
+}
+
+.output {
+    margin-top: 30px;
 }

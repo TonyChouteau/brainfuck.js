@@ -6,7 +6,7 @@ function handleAnimation() {
     const $title = $(".home-title");
     const t = {
         0: "BrainFuck.js",
-        1: ",>,<[->>+<<]>[->+<]>.",
+        1: ",>,[-<+>]<.",
         cursor: 0,
         stringCursor: 0,
         way: 0
